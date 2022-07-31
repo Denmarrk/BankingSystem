@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" th:href="@{/assets3/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets3/css/styles.css}">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center">History of Transaction</h1>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>From Account Number</th>
+                            <th>Amount </th>
+                            <th>To Account Number </th>
+                            <th>Creation Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <tr th:each="Trnsact : ${listUserAccount}">
+                           <td th:text=" ${Trnsact.fromaccountnumber}"></td>
+            <td th:text=" ${Trnsact.amounttransfer}"></td>
+            <td th:text=" ${Trnsact.toaccountnumber}"></td>
+            <td th:text=" ${Trnsact.transactiondate}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"><a class="btn btn-success btn-sm Logout" role="button" href="#" Onclick="gologout()" target="_blank" >Home Page </a></div>
+        <!--  <div class="col-md-6"><a class="btn btn-success btn-sm Logout" role="button" href="#">Transfer Money</a></div> -->
+    </div>
+ 
+	<script type="text/javascript"> 
+		function gologout(){
+			window.location.href="/Index"   ;
+		}
+	</script>
+  <script th:src="@{/assets3/js/jquery.min.js}"></script>
+    <script th:src="@{/assets3/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

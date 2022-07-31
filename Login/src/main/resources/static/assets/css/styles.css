@@ -1,0 +1,11 @@
+body{
+  background-image:url(../../assets/img/Untitled.jpg);
+  margin:0;
+  background-size:cover;
+}
+
+.blur{
+  background-image:url(../../assets/img/Untitled.jpg);
+  filter:blur(6px);
+}
+

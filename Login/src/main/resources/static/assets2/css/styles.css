@@ -1,0 +1,41 @@
+.h1, .h2, .h3, h1, h2, h3{
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.jumbotron{
+  padding-top:6px;
+  padding-bottom:4px;
+  margin-bottom:13px;
+  color:inherit;
+  background-color:#eee;
+  padding-left:38px;
+}
+
+a.btn.btn-success.Logout{
+  margin-left:80px;
+  padding:25px;
+  margin-top:28px;
+}
+
+.scroll{
+  overflow-y:scroll;
+  width:572px;
+  background:blue;
+  overflow:hidden;
+  height:449px;
+}
+
+body{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:14px;
+  line-height:1.42857143;
+  color:#333;
+  background-color:#fff;
+}
+
+.row{
+  margin-right:0px;
+  margin-left:-1px;
+}
+

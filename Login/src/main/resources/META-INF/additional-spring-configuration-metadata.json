@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "api.base.path",
+    "type": "java.lang.String",
+    "description": "A description for 'api.base.path'"
+  },
+  {
+    "name": "Access-Control-Allow-Origin",
+    "type": "java.lang.String",
+    "description": "A description for 'Access-Control-Allow-Origin'"
+  },
+  {
+    "name": "Access-Control-Allow-Methods",
+    "type": "java.lang.String",
+    "description": "A description for 'Access-Control-Allow-Methods'"
+  }
+]}
