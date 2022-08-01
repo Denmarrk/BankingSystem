@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.ArrayList;
+
 
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.Repository.transRepo;
+
 import com.example.demo.Service.LoginService;
 import com.example.demo.Service.SaveData;
 import com.example.demo.Service.TransService;
@@ -35,7 +35,7 @@ import com.example.demo.Transac.Transact;
 import com.example.demo.Transac.Transactjson;
 import com.example.demo.domain.AdminLogin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class LoginController 
