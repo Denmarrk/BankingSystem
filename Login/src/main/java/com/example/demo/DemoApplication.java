@@ -12,10 +12,11 @@ public class DemoApplication {
 		//System.out.print("dsadas");
 	}
 
-	//g it status  -red
+	//git status  -red
 	// git add .
 	// git commit -m "message"
 	//git push
+	
 	
 	//docker image build -t login .
 	//docker container run --name login -p 8081:8081 -d login

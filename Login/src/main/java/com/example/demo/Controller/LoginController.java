@@ -72,7 +72,8 @@ public class LoginController
 	@GetMapping("/Index")
 	public String Index(Model model) {
 		//result = restTemplate.getForObject("http://localhost:8080/Account/user5/"+save.getUsername(), AdminLogin.class);
-		if(Objects.nonNull(result.getFirstname())) {
+		if(Objects.nonNull(result.getFirstname()))
+		{
 		 model.addAttribute("firstname",result.getFirstname());
 		 model.addAttribute("lastname",result.getLastname());
 		 model.addAttribute("accountnumber",result.getAccountnumber());
@@ -288,7 +289,10 @@ public class LoginController
 		       
 		       AdminLogin account = loginService.getaccount(trans.getToaccountnumber());
 		   	if(Objects.nonNull(account)) {
-				 AdminLogin add= new AdminLogin(); double addbal = bal + transfer;
+				 AdminLogin add= new AdminLogin(); 
+				 
+				 
+				 double addbal = account.getTotalbalance() + transfer;
 				 
 				 add.setAccountnumber(trans.getToaccountnumber());
 				 add.setTotalbalance(addbal); HttpHeaders header1 = new HttpHeaders();
