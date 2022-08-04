@@ -1,23 +1,27 @@
 package com.example.demo.Main;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "useraccount")
 public class UserMain {
 	
 	@Id
-	
-	@Column ( name = "Id")
-	private int Id; 
-	
-	@Column ( name = "accountnumber")
+	@GenericGenerator(name = "account_no", strategy = "com.example.demo.Main.AccountIdGenerator")
+    @GeneratedValue(generator = "account_no") 
+    @Column(columnDefinition = "varchar(22)")
 	private String accountnumber; 
-	
 	@Column ( name = "contactnumber")
 	private String contactnumber;
 	
@@ -27,18 +31,19 @@ public class UserMain {
 	@Column ( name = "lastname")
 	private String lastname;
 	
-
+	 @CreationTimestamp
+	 @Temporal(TemporalType.TIMESTAMP)
 	@Column ( name = "creationdate")
-	private String creationdate;
+	private Date creationdate;
 
+	@Column ( name = "typeoffaccount")
+	private String typeoffaccount;
 	
-	
-	
-	public String getCreationdate() {
+	public Date getCreationdate() {
 		return creationdate;
 	}
 
-	public void setCreationdate(String creationdate) {
+	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
 	}
 	@Column ( name = "username")
@@ -48,16 +53,17 @@ public class UserMain {
 	
 
 	
+	public String getTypeoffaccount() {
+		return typeoffaccount;
+	}
+
+	public void setTypeoffaccount(String typeoffaccount) {
+		this.typeoffaccount = typeoffaccount;
+	}
 	@Column ( name = "Totalbalance")
 	private int totalbalance;
 
-	public int getId() {
-		return Id;
-	}
 
-	public void setId(int id) {
-		Id = id;
-	}
 
 	public String getAccountnumber() {
 		return accountnumber;
@@ -113,28 +119,25 @@ public class UserMain {
 		
 	}
 
-	public UserMain(int id, String accountnumber, String contactnumber, String firstname, String lastname,
-			String creationdate, String username, int totalbalance) {
+	public UserMain(String accountnumber, String contactnumber, String firstname, String lastname, Date creationdate,
+			String typeoffaccount, String username, int totalbalance) {
 		super();
-		Id = id;
 		this.accountnumber = accountnumber;
 		this.contactnumber = contactnumber;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.creationdate = creationdate;
+		this.typeoffaccount = typeoffaccount;
 		this.username = username;
 		this.totalbalance = totalbalance;
 	}
 
 	@Override
 	public String toString() {
-		return "UserMain [Id=" + Id + ", accountnumber=" + accountnumber + ", contactnumber=" + contactnumber
-				+ ", firstname=" + firstname + ", lastname=" + lastname + ", creationdate=" + creationdate
-				+ ", username=" + username + ", totalbalance=" + totalbalance + "]";
+		return "UserMain [accountnumber=" + accountnumber + ", contactnumber=" + contactnumber + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", creationdate=" + creationdate + ", typeoffaccount="
+				+ typeoffaccount + ", username=" + username + ", totalbalance=" + totalbalance + "]";
 	}
-
-
-
 
 	
 	

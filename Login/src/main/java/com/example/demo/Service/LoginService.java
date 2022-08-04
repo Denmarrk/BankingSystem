@@ -6,25 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Repository.LoginRepository;
-import com.example.demo.Transac.Transact;
-import com.example.demo.domain.AdminLogin;
+
+import com.example.demo.domain.UserLogin;
+
 
 @Service
 public class LoginService  {
 	@Autowired
 	private LoginRepository repo;
 	
-	public AdminLogin loginrepo(String username, String password) {
+	public UserLogin loginrepo(String username, String password) {
 		
-		AdminLogin user = repo.findByUsernameAndPassword(username, password);
+		UserLogin user = repo.findByUsernameAndPassword(username, password);
 	
 		return user;
 	
 	}
 
-	public AdminLogin getaccount(String accountnumber) {
-		AdminLogin account = repo.findByAccountnumber(accountnumber);
+	public UserLogin getaccount(String accountnumber) {
+		UserLogin account = repo.findByAccountnumber(accountnumber);
 		return account;
+	}
+
+	public List<UserLogin> getNewList(String contactnumber, String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		return repo.findByContactnumberAndFirstnameAndLastname(contactnumber,firstname,lastname );
 	}
 	
 	

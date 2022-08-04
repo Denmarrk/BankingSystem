@@ -17,31 +17,43 @@
         <div class="login-card">
             <p class="profile-name-card"> </p>
             
-            <form class="form-signin" th:action="@{/transact}" th:object="${trans}"  method="POST"    ><span class="reauth-email"> </span>
+            <form class="form-signin" th:action="@{/addUser}" th:object="${addUser}"  method="POST"    ><span class="reauth-email"> </span>
                 
                 <h2 th:text="${error}"></h2>
-                <input class="form-control"  type="number" th:field="*{amounttransfer}" placeholder= "Ammount Of Transfer"  required="" autofocus="" id="inputEmail">
-              <!--   <input class="form-control" type="text" th:field="*{transactiondate}"  placeholder="Transaction Date" id="inputPassword">--> 
-                 <input class="form-control"  type="number" th:field="*{toaccountnumber}"  placeholder= "To Account Number"  required="" autofocus="" id="inputEmail">
-                 
+                
+                <h3  th:text="${firstname} + ' ' +${lastname}"> </h3>
+                
+                <h3  th:text="${contactnumber}" > </h3>
+                <input class="form-control"  type="number" th:field="*{totalbalance}"  placeholder= "Balance"  required="" autofocus="" >
+
                 <div class="checkbox">
                     <div class="checkbox">
                         <label>
                             </label>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit" onclick="goToRegister()" target="_blank">Transfer Money</button>
+                <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit" onclick="goToRegister()" target="_blank">Create new Account</button>
                   
             </form><a href="#" class="forgot-password"></a>
-            <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit" onclick="goHomepage()" target="_blank">Home Page</button>
+          
             </div>
+              <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit" onclick="goHomepage()" target="_blank">Home Page</button>
     </div>
     
+	
+	<script type="text/javascript">
+		function goToRegister(){
+			window.location.href="/";
+		}
+		
+	</script>
 		<script type="text/javascript">
 		function goHomepage(){
 			window.location.href="/";
 		}
+		
 	</script>
+	
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

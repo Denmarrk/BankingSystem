@@ -39,14 +39,15 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/user1/{id}")
-	public UserMain findUserByID(@PathVariable int Id){
-		return userService.getUserMainByUserId(Id) ;
-		
-	}
+	/*
+	 * @GetMapping("/user1/{id}") public UserMain findUserByID(@PathVariable int
+	 * Id){ return userService.getUserMainByUserId(Id) ;
+	 * 
+	 * }
+	 */
 	
 	@GetMapping("/user2/{accountnumber}")
-	public  UserMain findByaccountnumber(@PathVariable int accountnumber) {
+	public  UserMain findByaccountnumber(@PathVariable String accountnumber) {
 		return userService.getUserMainByAccountNumber(accountnumber);
 		
 	}

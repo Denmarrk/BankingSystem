@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dm Banks</title>
+    <link rel="stylesheet" th:href="@{/assets1/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets1/css/style.css}">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">DmBanks </a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">List Of Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                   
+                            <li role="presentation" th:each = "newAccount : ${listUserAccount}">
+                            
+                             <!--   <form class="form-signin"  th:action="@{/NewAccount}" th:object="${user}"  method="POST" >
+                                <input class="form-control"  type="hidden" required=""  th:value="${AdminLogin.accountnumber}" disabled >
+                                 <button  type="submit" th:text="${AdminLogin.accountnumber}" ></button> --> 
+                                 
+                                 <a th:href = "@{/Index(accountnumber=${newAccount.accountnumber})}">[[${newAccount.accountnumber}]]</a>
+                             <!--<a th:href="/NewAccount/{newAccount.accountnumber}"    th:name ="${newAccount.accountnumber}" th:text=" ${newAccount.accountnumber}"  ></a>
+                               <a th:href="/newaccount?id=${customer.id}">Edit</a>
+                             </form>-->
+                             </li>
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav navbar-nav">
+                    <li class="active" role="presentation" ><a>Homepage</a></li>
+                    <li role="presentation"><a href="#" target="_blank" onclick="Transfer()">Transfer Money</a></li>
+                    <li role="presentation"><a href="#" target="_blank" onclick="List()">History of Transaction</a></li>
+                     <li role="presentation"><a href="#" target="_blank" onclick="adduser()">Add Another Account</a></li>
+                </ul>
+                <button class="btn btn-default navbar-btn navbar-right leftbut" type="button" onclick="gologout()" target="_blank">LOGOUT</button>
+            </div>
+        </div>
+    </nav>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1 class="text-center">Welcome! </h1></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h2 class="text-center gilid" th:text=" ${firstname} +' '+ ${lastname}">Denmarrk Geroso</h2></div>
+                <div class="jumbotron">
+                    <h2 class="text-justify justy">Account Number</h2>
+                    <p class="text-center" th:text="${accountnumber}"> </p>
+                </div>
+                <div class="jumbotron">
+                    <h2 class="text-justify justy">Contact Number</h2>
+                  <p class="text-center" th:text="${contactnumber}"> </p>
+                </div>
+                <div class="jumbotron">
+                    <h2 class="text-justify justy">Account Balance</h2>
+                    <p class="text-center" th:text="${totalbalance}"> </p>
+                </div>
+                <div class="jumbotron">
+                    <h2 class="text-justify justy">Account Creation Date </h2>
+                    <p class="text-center" th:text="${creationdate}"> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    	<script type="text/javascript">
+		function gologout(){
+			window.location.href="/login";
+		}
+	</script>
+	<script type="text/javascript">
+		function Transfer(){
+			window.location.href="/transact";
+		}
+	</script>
+		</script>
+		<script type="text/javascript">
+		function List(){
+			window.location.href="/ListofTransaction";
+		}
+	</script>
+	</script>
+		</script>
+		<script type="text/javascript">
+		function adduser(){
+			window.location.href="/addUser";
+		}
+	</script>
+    <script th:src="@{assets/js/jquery.min.js}"></script>
+    <script th:src="@{assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{assets/js/script.js}"></script>
+</body>
+
+</html>

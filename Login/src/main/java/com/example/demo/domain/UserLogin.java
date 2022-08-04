@@ -7,18 +7,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="useraccount")
-public class AdminLogin {
+public class UserLogin {
 	@Id
+	@Column ( name = "accountnumber")
+	private String accountnumber; 
 	@Column (name = "username")
 	private String username;
 	@Column (name = "password")
 	private String password;
 	@Column (name ="firstname")
 	private String firstname;
-	@Column ( name = "Id")
-	private int Id; 
-	@Column ( name = "accountnumber")
-	private String accountnumber; 
+	@Column ( name = "typeoffaccount")
+	private String typeoffaccount;
+
+
 	@Column ( name = "contactnumber")
 	private String contactnumber;
 	@Column ( name = "lastname")
@@ -29,7 +31,14 @@ public class AdminLogin {
 	private String creationdate;
 
 	
-	
+
+	public String getTypeoffaccount() {
+		return typeoffaccount;
+	}
+
+	public void setTypeoffaccount(String typeoffaccount) {
+		this.typeoffaccount = typeoffaccount;
+	}
 	
 	public String getCreationdate() {
 		return creationdate;
@@ -39,13 +48,6 @@ public class AdminLogin {
 		this.creationdate = creationdate;
 	}
 
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
 
 	public String getAccountnumber() {
 		return accountnumber;
@@ -104,21 +106,23 @@ public class AdminLogin {
 	
 
 
-	public AdminLogin(String username, String password, String firstname, int id, String accountnumber,
+
+
+	public UserLogin(String accountnumber, String username, String password, String firstname, String typeoffaccount,
 			String contactnumber, String lastname, double totalbalance, String creationdate) {
 		super();
+		this.accountnumber = accountnumber;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
-		Id = id;
-		this.accountnumber = accountnumber;
+		this.typeoffaccount = typeoffaccount;
 		this.contactnumber = contactnumber;
 		this.lastname = lastname;
 		this.totalbalance = totalbalance;
 		this.creationdate = creationdate;
 	}
 
-	public AdminLogin() {
+	public UserLogin() {
 	
 		// TODO Auto-generated constructor stub
 	}

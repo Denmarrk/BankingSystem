@@ -30,11 +30,8 @@ public class UserService {
 		
 	}
 	
-	public UserMain getUserMainByUserId(int Id) {
-		return userRepository.findById(Id).orElse(null);
-		
-	}
-	public UserMain getUserMainByAccountNumber(int accountnumber) {
+
+	public UserMain getUserMainByAccountNumber(String accountnumber) {
 		return userRepository.findByAccountnumber(accountnumber);
 		
 	}
@@ -53,20 +50,21 @@ public class UserService {
 		
 	}
 	
-	public String DeleteUser(int Id ) {
-		userRepository.deleteById(Id);
-		return "User Is removed !!" +Id;
+	public String DeleteUser(int accountnumber ) {
+		userRepository.deleteById(accountnumber);
+		return "User Is removed !!" +accountnumber;
 				
 	}
 	
-	public UserMain updateUser(UserMain useraccount) {
-		UserMain existingUser= userRepository.findById(useraccount.getId()).orElse(null);
-		existingUser.setFirstname(useraccount.getFirstname());
-		existingUser.setLastname(useraccount.getLastname());
-		existingUser.setUsername(useraccount.getUsername());
-		
-		return userRepository.save(existingUser);
-	}
+	/*
+	 * public UserMain updateUser(UserMain useraccount) { UserMain existingUser=
+	 * userRepository.findById(useraccount.getId()).orElse(null);
+	 * existingUser.setFirstname(useraccount.getFirstname());
+	 * existingUser.setLastname(useraccount.getLastname());
+	 * existingUser.setUsername(useraccount.getUsername());
+	 * 
+	 * return userRepository.save(existingUser); }
+	 */
 	
 	public UserMain updateUsers(String accountnumber,UserMain useraccount) {
 		UserMain existingUser= userRepository.findByAccountnumber(useraccount.getAccountnumber());
