@@ -51,11 +51,71 @@ public class LoginController
 	
 	@GetMapping("/login")
 	public  ModelAndView loginhomepage(){
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("user",new UserLogin() );
-		return mav;
+		  if(Objects.nonNull(result.getFirstname())) 
+		  {
+				ModelAndView mav = new ModelAndView("redirect:/");
+			//	mav.addObject("user",new UserLogin() );
+				return mav;
+		  }
+			ModelAndView mav = new ModelAndView("login");
+			mav.addObject("user",new UserLogin() );
+			return mav;
 	}
-
+	
+	
+	
+	
+	
+	@GetMapping("/logout")
+	public  String logout(){
+		result.setFirstname(null);
+		return "redirect:/login";
+		
+		
+	}
+	
+	
+	
+	@RequestMapping("/login")
+	public String login(@ModelAttribute("user") UserLogin user,Model model)    {
+	
+		
+		System.out.print(user.getUsername());
+		if (!user.getUsername().equals(null)) {
+		
+			
+			UserLogin verifys = loginService.loginrepo(user.getUsername(), user.getPassword());
+			if(Objects.nonNull(verifys))
+			{
+		   result = restTemplate.getForObject("http://localhost:8080/user5/"+verifys.getUsername(), UserLogin.class);
+		 model.addAttribute("firstname",result.getFirstname());
+		 model.addAttribute("lastname",result.getLastname());
+		 model.addAttribute("username",result.getUsername());
+		 model.addAttribute("accountnumber",result.getAccountnumber());
+		 model.addAttribute("contactnumber",result.getContactnumber());
+		 model.addAttribute("totalbalance",result.getTotalbalance());
+		 model.addAttribute("creationdate",result.getCreationdate());
+		 
+		 ////////////////////////////////////List of Account///////////////////////////////
+		 
+			return "redirect:/";
+			
+			}else			
+			 {
+				model.addAttribute("error", "Wrong Password");	
+				return "login";
+		   	}
+			
+			
+			
+		}
+		else {
+			model.addAttribute("error", "Wrong Password");	
+			return"login";
+		}
+		
+	}	
+	
 	/*
 	 * @GetMapping("/Index") public String Index(Model model) {
 	 * 
@@ -120,46 +180,7 @@ public class LoginController
 	}
 	
 
-	@RequestMapping("/login")
-	public String login(@ModelAttribute("user") UserLogin user,Model model)    {
-	
-		
-		System.out.print(user.getUsername());
-		if (!user.getUsername().equals("na") && !user.getUsername().equals("Na")) {
-		
-			
-			UserLogin verifys = loginService.loginrepo(user.getUsername(), user.getPassword());
-			if(Objects.nonNull(verifys))
-			{
-		   result = restTemplate.getForObject("http://localhost:8080/Account/user5/"+verifys.getUsername(), UserLogin.class);
-		 model.addAttribute("firstname",result.getFirstname());
-		 model.addAttribute("lastname",result.getLastname());
-		 model.addAttribute("username",result.getUsername());
-		 model.addAttribute("accountnumber",result.getAccountnumber());
-		 model.addAttribute("contactnumber",result.getContactnumber());
-		 model.addAttribute("totalbalance",result.getTotalbalance());
-		 model.addAttribute("creationdate",result.getCreationdate());
-		 
-		 ////////////////////////////////////List of Account///////////////////////////////
-		 
-			return "redirect:/";
-			
-			}else			
-			 {
-				model.addAttribute("error", "Wrong Password");	
-				return "login";
-		   	}
-			
-			
-			
-		}
-		else {
-			model.addAttribute("error", "Wrong Password");	
-			return"login";
-		}
-		
-	}	
-	
+
 	  @GetMapping("/transact") 
 	  public ModelAndView transactionPage()
 	  {
@@ -199,7 +220,8 @@ public class LoginController
 			
 			  double  transfer = trans.getAmounttransfer();
 			 //System.out.print(bal);
-			 if (bal>=transfer) { 
+			  if (transfer > 0) {
+			 if (  bal>=transfer  ) { 
 				 
 				 double total = bal - transfer;
 		
@@ -220,7 +242,7 @@ public class LoginController
 		      HttpEntity<UserLogin> entitys = new HttpEntity<UserLogin>(up,header);
 		      
 		       restTemplate.exchange(
-		         "http://localhost:8080/Account/update", HttpMethod.PUT, entitys, String.class).getBody();
+		         "http://localhost:8080/update", HttpMethod.PUT, entitys, String.class).getBody();
 		       
 		       
 		       
@@ -251,7 +273,7 @@ public class LoginController
 				 header1.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 				 HttpEntity<UserLogin> entitys1 = new HttpEntity<UserLogin>(add,header1);
 				 
-				restTemplate.exchange( "http://localhost:8080/Account/update",
+				restTemplate.exchange( "http://localhost:8080/update",
 				  HttpMethod.PUT, entitys1, String.class).getBody();
 				
 				return "redirect:/";
@@ -259,12 +281,18 @@ public class LoginController
 			 //////////////////////////////////////////////////////////////////////////
 		   	
 		return "redirect:/";
-		
 
 		 }
 				model.addAttribute("error", "Not Enough Balance");
 			 
 			return "transact";
+			  }
+			  
+			  model.addAttribute("error", "You Cannot Transfer 0 Amount");
+				 
+				return "transact";
+			  
+			
 
 	}	
 
@@ -273,9 +301,9 @@ public class LoginController
 	  {
 		  //if(Objects.nonNull(result.getFirstname())) 
 		 // {
-			  model.addAttribute("firstname", result.getFirstname());
-			  model.addAttribute("lastname", result.getLastname());
-			  model.addAttribute("contactnumber", result.getContactnumber());
+		 model.addAttribute("firstname", result.getFirstname());
+		  model.addAttribute("lastname", result.getLastname());
+		  model.addAttribute("contactnumber", result.getContactnumber());
 	  ModelAndView mav = new ModelAndView("addUser");
 	  mav.addObject("addUser",new UserLogin() ); 
 	  return mav;
@@ -284,35 +312,38 @@ public class LoginController
 		@PostMapping("/addUser")
 		public String addUser(@ModelAttribute("addUser") UserLogin addUser, Model model)     {
 	
-			 
-			
+			model.addAttribute("firstname", result.getFirstname());
+			  model.addAttribute("lastname", result.getLastname());
+			  model.addAttribute("contactnumber", result.getContactnumber());
 			 addnew.setFirstname(result.getFirstname());
 			 addnew.setLastname(result.getLastname());
 		     addnew.setTypeoffaccount("Secondary");
-		     addnew.setPassword("N/A");
-		     addnew.setUsername("N/A");
+	
 			 addnew.setTotalbalance(addUser.getTotalbalance());
 			addnew.setContactnumber(result.getContactnumber());
-			
+			if(addUser.getTotalbalance()>0) {
 			  HttpHeaders headers = new HttpHeaders();
 			     headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 			     HttpEntity<UserLogin> entity = new HttpEntity<UserLogin>(addnew,headers);
 			     
 			    restTemplate.exchange(
-			        "http://localhost:8080/Account/adduser", HttpMethod.POST, entity, String.class).getBody();
+			        "http://localhost:8080/adduser", HttpMethod.POST, entity, String.class).getBody();
 			
 			return "redirect:/";
-		
+			} else {
+			model.addAttribute("error", "You Cannot Transfer 0 Amount");
+			return "addUser";
+			}
 		}
 		
 
 
-			@RequestMapping("/Index")
+			@GetMapping("/Index")
 			public ModelAndView editCustomerForm(@RequestParam(value= "accountnumber") String accountnumber,Model model) {
 			    ModelAndView mav = new ModelAndView("redirect:/");
 			    System.out.print(accountnumber);
 			    
-			    result = restTemplate.getForObject("http://localhost:8080/Account/user2/"+accountnumber, UserLogin.class);
+			    result = restTemplate.getForObject("http://localhost:8080/user2/"+accountnumber, UserLogin.class);
 			  model.addAttribute("firstname", result.getFirstname()); 
 			  model.addAttribute("lastname", result.getLastname());
 			     model.addAttribute("accountnumber", result.getAccountnumber());

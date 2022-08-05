@@ -19,10 +19,13 @@
             
             <form class="form-signin" th:action="@{/transact}" th:object="${trans}"  method="POST"    ><span class="reauth-email"> </span>
                 
+                
                 <h2 th:text="${error}"></h2>
+                
+                
                 <input class="form-control"  type="number" th:field="*{amounttransfer}" placeholder= "Ammount Of Transfer"  required="" autofocus="" id="inputEmail">
               <!--   <input class="form-control" type="text" th:field="*{transactiondate}"  placeholder="Transaction Date" id="inputPassword">--> 
-                 <input class="form-control"  type="number" th:field="*{toaccountnumber}"  placeholder= "To Account Number"  required="" autofocus="" id="inputEmail">
+                 <input class="form-control"  type="text" th:field="*{toaccountnumber}"  placeholder= "To Account Number"  required="" autofocus="" >
                  
                 <div class="checkbox">
                     <div class="checkbox">

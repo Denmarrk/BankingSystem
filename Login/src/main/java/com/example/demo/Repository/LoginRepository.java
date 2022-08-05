@@ -18,6 +18,7 @@ public interface LoginRepository extends JpaRepository<UserLogin, Long>{
 	UserLogin findByAccountnumber(String accountnumber);
 
 
+	
 	List<UserLogin> findByContactnumberAndFirstnameAndLastname(String contactnumber, String firstname,
 			String lastname);
 
